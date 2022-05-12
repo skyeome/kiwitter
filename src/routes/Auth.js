@@ -1,4 +1,4 @@
-import authService from "fbase";
+import { authService } from "fbase";
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 
