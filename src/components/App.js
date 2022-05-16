@@ -4,24 +4,24 @@ import { authService } from "fbase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [init,setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userObj,setUserObj] = useState(null);
-  useEffect(()=>{
-    onAuthStateChanged(authService,(user)=>{
-      if(user){
-        setIsLoggedIn(true);
+  const [init, setInit] = useState(false);
+  const [userObj, setUserObj] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(authService, (user) => {
+      if (user) {
         setUserObj(user);
-      } else {
-        setIsLoggedIn(false);
       }
       setInit(true);
     });
-  },[])
+  }, []);
   //console.log(authService.currentUser);
   return (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : "Service Initializing..."}
+      {init ? (
+        <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} />
+      ) : (
+        "Service Initializing..."
+      )}
       <footer>&copy; {new Date().getFullYear()} Kiwitter</footer>
     </>
   );
